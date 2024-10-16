@@ -1,0 +1,22 @@
+{% extends '../layout/base.html' %}
+
+{% block content %}
+<link rel="stylesheet" href="style.css">
+<section class="antialiased bg-gray-100 text-gray-600 h-screen px-4">
+  <div class="flex flex-col justify-center h-full">
+    <div class="w-full max-w-2xl mx-auto bg-white shadow-lg rounded-sm border border-gray-200">
+      <header class="px-5 py-4 border-b border-gray-100">
+        <div class="font-semibold text-gray-800">Confirm Delete</div>
+      </header>
+      <div class="p-5">
+        <h1 class="text-lg font-semibold">Are you sure you want to delete "{{ book.title }}"?</h1>
+        <form method="post" class="mt-4">
+          {% csrf_token %}
+          <button type="submit" class="py-2 px-4 shadow-md no-underline rounded-full bg-red-500 text-white font-sans font-semibold text-sm border-blue btn-primary hover:text-white hover:bg-red-300 focus:outline-none active:shadow-none mr-2">Delete</button>
+        </form>
+        <a href="{% url 'book_list' %}" class="text-blue-500 hover:underline">Cancel</a>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}

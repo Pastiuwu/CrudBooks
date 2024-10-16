@@ -1,0 +1,35 @@
+{% extends '../layout/base.html' %}
+
+{% block content %}
+
+<section class="antialiased bg-gray-100 text-gray-600 h-screen px-4">
+  <div class="flex flex-col justify-center h-full">
+    <div class="w-full max-w-2xl mx-auto bg-white shadow-lg rounded-sm border border-gray-200">
+      <header class="px-5 py-4 border-b border-gray-100">
+        <div class="font-semibold text-gray-800">Book List</div>
+        <div class="justify-right my-8 select-none flex">
+          <a href="{% url 'book_create' %}">
+            <button class="py-2 px-4 shadow-md no-underline rounded-full bg-blue-500 text-white font-sans font-semibold text-sm border-blue btn-primary hover:text-white hover:bg-blue-300 focus:outline-none active:shadow-none">Add New Book</button>
+          </a>
+        </div>
+      </header>
+      <div class="p-5">
+        <ul class="list-disc pl-5">
+          {% for book in books %}
+            <li class="flex justify-between items-center py-2">
+              <a href="{% url 'book_detail' book.pk %}" class="text-blue-600 hover:underline">{{ book.title }}</a>
+              <div>
+                <a href="{% url 'book_update' book.pk %}" class="text-purple-600 hover:underline mr-4">Edit</a>
+                <a href="{% url 'book_delete' book.pk %}" class="text-red-600 hover:underline">Delete</a>
+              </div>
+            </li>
+          {% empty %}
+            <li>No books found.</li>
+          {% endfor %}
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}
+
