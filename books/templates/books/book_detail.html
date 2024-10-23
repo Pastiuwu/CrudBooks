@@ -1,22 +1,29 @@
-{% extends '../layout/base.html' %}
+{% extends 'layout/base.html' %}
 
 {% block content %}
-<section class="antialiased bg-gray-100 text-gray-600 h-screen px-4">
-  <div class="flex flex-col justify-center h-full">
-    <div class="w-full max-w-2xl mx-auto bg-white shadow-lg rounded-sm border border-gray-200">
-      <header class="px-5 py-4 border-b border-gray-100">
-        <div class="font-semibold text-gray-800">{{ book.title }}</div>
-      </header>
-      <div class="p-5">
-        <p class="mb-2"><strong>Author:</strong> {{ book.author }}</p>
-        <p class="mb-2"><strong>Genre:</strong> {{ book.genre }}</p>
-        <p class="mb-2"><strong>Published Year:</strong> {{ book.published_year }}</p>
-        <div class="mt-4">
-          <a href="{% url 'book_update' book.pk %}" class="py-2 px-4 shadow-md no-underline rounded-full bg-blue-500 text-white font-sans font-semibold text-sm border-blue btn-primary hover:text-white hover:bg-blue-200 focus:outline-none active:shadow-none mr-2">Edit</a>
-          <a href="{% url 'book_list' %}" class="py-2 px-4 shadow-md no-underline rounded-full bg-gray-500 text-white font-sans font-semibold text-sm border-blue btn-primary hover:text-white hover:bg-gray-300 focus:outline-none active:shadow-none">Back to List</a>
+<div class="container mt-5">
+    <h2 class="text-center text-primary">{{ book.title }}</h2>
+    
+    <div class="card mt-4">
+        <div class="card-body">
+            <h5 class="card-title">Detalles del Libro</h5>
+            <p class="card-text">
+                <strong>Autor:</strong> {{ book.author }}<br>
+                <strong>Categoria:</strong> {{ book.categories }}<br>
+                <strong>Año de Publicación:</strong> {{ book.published_year }}<br>
+                <strong>Público Objetivo:</strong> {{ book.target_audience }}<br> 
+                <strong>Estado:</strong> 
+                <span class="badge {% if book.in_stock %}bg-success{% else %}bg-danger{% endif %}">
+                    {% if book.in_stock %}En Stock{% else %}Sin Stock{% endif %}
+                </span>
+            </p>
+
+            <div class="d-flex justify-content-between mt-4">
+                <a href="{% url 'book_update' book.pk %}" class="btn btn-warning">Editar</a>
+                <a href="{% url 'book_delete' book.pk %}" class="btn btn-danger">Eliminar</a>
+                <a href="{% url 'book_list' %}" class="btn btn-secondary">Volver a la Lista</a>
+            </div>
         </div>
-      </div>
     </div>
-  </div>
-</section>
+</div>
 {% endblock %}
